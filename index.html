@@ -383,7 +383,7 @@
           var mobileNumber = this.value;
           if (mobileNumber.length === 10) {
             fetch(
-              "https://script.google.com/macros/s/AKfycbwnzspk44rTUmVEONqcM-S1Lhf-OS2zSDZGXLnCkKfVC1Mp0xh4c8TWVyY9pgXZ5DtQ/exec?mobileNumber=?mobileNumber=" +
+              "https://script.google.com/macros/s/AKfycbwnzspk44rTUmVEONqcM-S1Lhf-OS2zSDZGXLnCkKfVC1Mp0xh4c8TWVyY9pgXZ5DtQ/exec?mobileNumber=" +
                 mobileNumber
             )
               .then((response) => response.json())
@@ -396,8 +396,7 @@
 
                   // Format the date of birth
                   var dob = new Date(data.dateOfBirth);
-                  var formattedDOB =
-                    "${dob.getDate()}-${dob.getMonth() + 1}-${dob.getFullYear()}";
+                  var formattedDOB = dob.toISOString().split("T")[0];
                   document.getElementById("date-of-birth").value = formattedDOB;
 
                   document.getElementById("unsettled-amount").value =
@@ -418,7 +417,6 @@
           }
         });
     </script>
-
     <script src="script.js"></script>
   </body>
 </html>
