@@ -50,7 +50,7 @@
               <div class="input-field">
                 <label>Location</label>
                 <select name="Location" id="location" required>
-                  <option disabled selected>Select Location</option>
+                  <option disabled>Select Location</option>
                   <option value="Panruti (M)">Panruti (M)</option>
                   <option value="Cuddalore">Cuddalore</option>
                   <option value="Villupuram">Villupuram</option>
@@ -204,7 +204,7 @@
               </div>
               <div class="input-field">
                 <label>Gender</label>
-                <select name="Gender" required>
+                <select name="Gender" id="gender" required>
                   <option disabled selected>Select Gender</option>
                   <option>Male</option>
                   <option>Female</option>
@@ -383,7 +383,7 @@
           var mobileNumber = this.value;
           if (mobileNumber.length === 10) {
             fetch(
-              "https://script.google.com/macros/s/AKfycbwnzspk44rTUmVEONqcM-S1Lhf-OS2zSDZGXLnCkKfVC1Mp0xh4c8TWVyY9pgXZ5DtQ/exec?mobileNumber=" +
+              "https://script.google.com/macros/s/AKfycbwnzspk44rTUmVEONqcM-S1Lhf-OS2zSDZGXLnCkKfVC1Mp0xh4c8TWVyY9pgXZ5DtQ/exec?mobileNumber=?mobileNumber=" +
                 mobileNumber
             )
               .then((response) => response.json())
@@ -393,8 +393,13 @@
                     data.customerName;
                   document.getElementById("gender").value = data.gender;
                   document.getElementById("location").value = data.location;
-                  document.getElementById("date-of-birth").value =
-                    data.dateOfBirth;
+
+                  // Format the date of birth
+                  var dob = new Date(data.dateOfBirth);
+                  var formattedDOB =
+                    "${dob.getDate()}-${dob.getMonth() + 1}-${dob.getFullYear()}";
+                  document.getElementById("date-of-birth").value = formattedDOB;
+
                   document.getElementById("unsettled-amount").value =
                     data.unsettledAmount;
                   document.getElementById("discount-amount").value =
@@ -413,6 +418,7 @@
           }
         });
     </script>
+
     <script src="script.js"></script>
   </body>
 </html>
