@@ -42,13 +42,14 @@
                   type="text"
                   placeholder="Enter Customer Name"
                   name="Customer Name"
+                  id="customer-name"
                   required
                 />
               </div>
 
               <div class="input-field">
                 <label>Location</label>
-                <select name="Location" required>
+                <select name="Location" id="location" required>
                   <option disabled selected>Select Location</option>
                   <option value="Panruti (M)">Panruti (M)</option>
                   <option value="Cuddalore">Cuddalore</option>
@@ -196,6 +197,7 @@
                   type="date"
                   placeholder="Enter birth date"
                   name="Date of Birth"
+                  id="date-of-birth"
                   min="1000-01-01"
                   max="9999-12-31"
                 />
@@ -349,7 +351,11 @@
               </div>
               <div class="input-field">
                 <label>Pending Amount</label>
-                <input type="number" placeholder="Balance Amount" id="" />
+                <input
+                  type="number"
+                  placeholder="Balance Amount"
+                  id="unsettled-amount"
+                />
               </div>
             </div>
           </div>
@@ -370,6 +376,43 @@
         </div>
       </form>
     </div>
+    <script>
+      document
+        .getElementById("mobile-number")
+        .addEventListener("blur", function () {
+          var mobileNumber = this.value;
+          if (mobileNumber.length === 10) {
+            fetch(
+              "https://script.google.com/macros/s/AKfycbwnzspk44rTUmVEONqcM-S1Lhf-OS2zSDZGXLnCkKfVC1Mp0xh4c8TWVyY9pgXZ5DtQ/exec?mobileNumber=" +
+                mobileNumber
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.customerName) {
+                  document.getElementById("customer-name").value =
+                    data.customerName;
+                  document.getElementById("gender").value = data.gender;
+                  document.getElementById("location").value = data.location;
+                  document.getElementById("date-of-birth").value =
+                    data.dateOfBirth;
+                  document.getElementById("unsettled-amount").value =
+                    data.unsettledAmount;
+                  document.getElementById("discount-amount").value =
+                    data.discountAmount;
+                } else {
+                  document.getElementById("customer-name").value =
+                    data.error || "Not Found";
+                  document.getElementById("gender").value = "";
+                  document.getElementById("location").value = "";
+                  document.getElementById("date-of-birth").value = "";
+                  document.getElementById("unsettled-amount").value = "";
+                  document.getElementById("discount-amount").value = "";
+                }
+              })
+              .catch((error) => console.error("Error:", error));
+          }
+        });
+    </script>
     <script src="script.js"></script>
   </body>
 </html>
