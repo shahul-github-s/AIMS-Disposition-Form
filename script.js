@@ -8,6 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   nextBtn.addEventListener("click", function (event) {
+    // Get the value of the "Name" field
+    let nameValue = document
+      .querySelector('input[name="Customer Name"]')
+      .value.trim();
+    // Correct the format of the name (capitalize each first letter)
+    let correctedName = nameValue
+      .toLowerCase()
+      .replace(/\b\w/g, function (char) {
+        return char.toUpperCase();
+      });
+    // Set the corrected name value to the hidden "CustomerName" field
+    document.getElementById("customer-name").value = correctedName;
+
     event.preventDefault();
     let allFilled = true;
 
