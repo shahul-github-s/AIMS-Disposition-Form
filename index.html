@@ -247,7 +247,7 @@
                     Job Application Support
                   </option>
                   <option value="Travel Services">Travel Services</option>
-                  <option value="Tour Services">Tour Services</option>
+                  <!-- <option value="Tour Services">Tour Services</option> -->
                 </select>
               </div>
 
@@ -270,9 +270,8 @@
                   id="lead-source-select"
                   required
                 >
-                  <option disabled selected>
-                    Select Lead Generated Source Name
-                  </option>
+                  <option disabled>Select Lead Generated Source Name</option>
+                  <option value="AIMS" selected>AIMS</option>
                 </select>
               </div>
               <div class="input-field">
@@ -282,16 +281,17 @@
                   id="customer-source-select"
                   required
                 >
-                  <option disabled selected>Select Customer Source Name</option>
+                  <option disabled>Select Customer Source Name</option>
+                  <option selected value="Walk-in">Walk-in</option>
                 </select>
               </div>
               <div class="input-field">
                 <label>Referrel Code</label>
                 <select name="Referrel Code" id="referral-code-select" required>
-                  <option disabled selected id="default-option">
+                  <option disabled id="default-option">
                     Select Referral Code
                   </option>
-                  <option value="AIMS-2007">AIMS-2007</option>
+                  <option value="AIMS-2007" selected>AIMS-2007</option>
                   <option value="AIMS-2024">AIMS-2024</option>
                 </select>
               </div>

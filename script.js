@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "Cruise Booking",
       "Hotel Booking",
       "Medical Appointment",
+      "Tour Services",
     ],
     "Tour Services": ["Domestic Tour Packages", "International Packages"],
   };
@@ -214,6 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     "Cruise Booking": ["Domestic", "International"],
     "Hotel Booking": ["Domestic", "International"],
+    "Tour Services": ["Domestic", "International"],
     "TN Employment Registration": ["New Register", "Renewal", "Addition"],
   };
 
