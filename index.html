@@ -10,15 +10,21 @@
       href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
     />
     <title>Disposition Form</title>
+    <style>
+      .loading {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <header>Disposition Form</header>
       <form
-        action="https://script.google.com/macros/s/AKfycbz2mAv0E8eCsBTRQLnOXtFhM3ibiFSBxZU4bqy5GLTX0PCldXsffX93_kaLIAECDbWc/exec"
+        action="index.html"
         name="submit-to-google-sheet"
         autocomplete="off"
         method="POST"
+        id="form"
       >
         <div class="form first">
           <div class="details personal">
@@ -50,7 +56,7 @@
               <div class="input-field">
                 <label>Location</label>
                 <select name="Location" id="location" required>
-                  <option disabled>Select Location</option>
+                  <option disabled selected>Select Location</option>
                   <option value="Panruti (M)">Panruti (M)</option>
                   <option value="Cuddalore">Cuddalore</option>
                   <option value="Villupuram">Villupuram</option>
@@ -244,6 +250,7 @@
                   <option value="Tour Services">Tour Services</option>
                 </select>
               </div>
+
               <div class="input-field">
                 <label>Service Department</label>
                 <select name="Department" id="department-select" required>
@@ -281,7 +288,9 @@
               <div class="input-field">
                 <label>Referrel Code</label>
                 <select name="Referrel Code" id="referral-code-select" required>
-                  <option disabled selected>Select Referral Code</option>
+                  <option disabled selected id="default-option">
+                    Select Referral Code
+                  </option>
                   <option value="AIMS-2007">AIMS-2007</option>
                   <option value="AIMS-2024">AIMS-2024</option>
                 </select>
@@ -329,18 +338,26 @@
               </div>
 
               <div class="input-field">
-                <label>Credited Transcation Mode</label>
-                <select name="Credited Transcation Mode" id="" required>
-                  <option disabled selected>Select Transcation Mode</option>
+                <label>Credited Transaction Mode</label>
+                <select
+                  name="Credited Transcation Mode"
+                  id="credited-transaction-mode"
+                  required
+                >
+                  <option disabled selected>Select Transaction Mode</option>
                   <option value="In-Hand Cash">In-Hand Cash</option>
-                  <option value="Online Transcation - UPI">
-                    Online Transcation - UPI
+                  <option value="Online Transaction - UPI">
+                    Online Transaction - UPI
                   </option>
                 </select>
               </div>
               <div class="input-field">
-                <label>Debited Transcation Bank</label>
-                <select name="Debited Transcation Mode" id="" required>
+                <label>Debited Transaction Bank</label>
+                <select
+                  name="Debited Transcation Mode"
+                  id="debited-transaction-bank"
+                  required
+                >
                   <option disabled selected>Select Debited Bank</option>
                   <option value="KVB">KVB</option>
                   <option value="Refai Account">Refai Account</option>
@@ -355,6 +372,8 @@
                   type="number"
                   placeholder="Balance Amount"
                   id="unsettled-amount"
+                  name="Balance Amount"
+                  readonly
                 />
               </div>
             </div>
@@ -403,20 +422,30 @@
                     data.unsettledAmount;
                   document.getElementById("discount-amount").value =
                     data.discountAmount;
+
+                  if (
+                    document.getElementById("customer-name").value ==
+                    "Customer not found"
+                  ) {
+                    alert("Customer Details not Found");
+                  }
                 } else {
                   document.getElementById("customer-name").value =
-                    data.error || "Not Found";
+                    data.error || "Customer not found";
                   document.getElementById("gender").value = "";
                   document.getElementById("location").value = "";
                   document.getElementById("date-of-birth").value = "";
                   document.getElementById("unsettled-amount").value = "";
                   document.getElementById("discount-amount").value = "";
+
+                  alert("Customer Details not Found");
                 }
               })
               .catch((error) => console.error("Error:", error));
           }
         });
     </script>
+
     <script src="script.js"></script>
   </body>
 </html>

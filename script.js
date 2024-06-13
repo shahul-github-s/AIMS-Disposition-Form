@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const nextBtn = form.querySelector(".nextBtn");
   const backBtn = form.querySelector(".backBtn");
   const formFirst = document.querySelector(".form.first");
-  const formSecond = document.querySelector(".form.second");
   const allRequiredFields = formFirst.querySelectorAll(
     "input[required], select[required]"
   );
@@ -34,15 +33,32 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   form.addEventListener("submit", function (e) {
+    const creditedTransactionMode = document.getElementById(
+      "credited-transaction-mode"
+    ).value;
+    const debitedTransactionBank = document.getElementById(
+      "debited-transaction-bank"
+    ).value;
     e.preventDefault();
+
     const scriptURL =
       "https://script.google.com/macros/s/AKfycbz2mAv0E8eCsBTRQLnOXtFhM3ibiFSBxZU4bqy5GLTX0PCldXsffX93_kaLIAECDbWc/exec";
-    fetch(scriptURL, { method: "POST", body: new FormData(form) })
-      .then((response) => {
-        alert("Thank you! Your form is submitted successfully.");
-        console.log("Success!", response);
-      })
-      .catch((error) => console.error("Error!", error.message));
+
+    if (
+      creditedTransactionMode === "Select Transaction Mode" ||
+      debitedTransactionBank === "Select Debited Bank"
+    ) {
+      alert("Please select a valid Transaction Details.");
+    } else {
+      fetch(scriptURL, { method: "POST", body: new FormData(form) })
+        .then((response) => {
+          alert("Thank you! Your form is submitted successfully.");
+          // console.log("Success!", response);
+          // Clear the Customer Name and Phone fields
+          location.reload();
+        })
+        .catch((error) => console.error("Error!", error.message));
+    }
   });
 
   const categorySelect = document.getElementById("category-select");
